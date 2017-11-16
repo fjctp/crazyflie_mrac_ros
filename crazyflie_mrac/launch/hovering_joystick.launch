@@ -1,0 +1,62 @@
+<launch>
+  <arg name="vrpn_server_ip" value="192.168.0.20"/>
+  <arg name="uri" default="radio://0/90/2M" />
+  <arg name="joy_dev" default="/dev/input/js0" />
+  <arg name="vrpn_topic" default="/vrpn_client_node/body1/pose" />
+  
+  <node name="rosapi" pkg="rosapi" type="rosapi_node"/>
+
+  <!-- Motion capture system -->
+  <include file="$(find vrpn_client_ros)/launch/sample.launch">
+    <arg name="server" value="$(arg vrpn_server_ip)"/>
+  </include>
+  
+  <!-- Crazyflie -->
+  <include file="$(find crazyflie_driver)/launch/crazyflie_server.launch"></include>
+  <group ns="crazyflie">
+    <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
+      <param name="uri" value="$(arg uri)" />
+      <param name="tf_prefix" value="crazyflie" />
+      <param name="enable_logging_imu" value="false" />
+      <param name="enable_logging_temperature" value="false" />
+      <param name="enable_logging_magnetic_field" value="false" />
+      <param name="enable_logging_pressure" value="false" />
+      <param name="enable_logging_battery" value="true" />
+      <!--<rosparam>
+        genericLogTopics: ["lqrCommands", "adpReferenceStates", "lqrStates",
+                           "lqrMotors", "fdfwdMotors", "adpMotors", "motors"]
+        genericLogTopicFrequencies: [20, 20, 20, 20, 20, 20, 20]
+        genericLogTopic_lqrCommands_Variables: [
+          "lqrCommands.roll", "lqrCommands.pitch", "lqrCommands.yaw", "lqrCommands.thrust"]
+        genericLogTopic_adpReferenceStates_Variables: [
+          "adpReferenceStates.p", "adpReferenceStates.q", "adpReferenceStates.r",
+          "adpReferenceStates.roll", "adpReferenceStates.pitch", "adpReferenceStates.yaw"]
+        genericLogTopic_lqrStates_Variables: [
+          "lqrStates.p", "lqrStates.q", "lqrStates.r", 
+          "lqrStates.roll", "lqrStates.pitch", "lqrStates.yaw"]
+        genericLogTopic_lqrMotors_Variables: [
+          "lqrOutputs.m1", "lqrOutputs.m2", "lqrOutputs.m3", "lqrOutputs.m4"]
+        genericLogTopic_fdfwdMotors_Variables: [
+          "fdfwdOutputs.m1", "fdfwdOutputs.m2", "fdfwdOutputs.m3", "fdfwdOutputs.m4"]
+        genericLogTopic_adpMotors_Variables: [
+          "adpOutputs.m1", "adpOutputs.m2", "adpOutputs.m3", "adpOutputs.m4"]
+        genericLogTopic_motors_Variables: [
+          "motor.m1", "motor.m2", "motor.m3", "motor.m4"]
+      </rosparam>-->
+    </node>
+  </group>
+
+
+  <node pkg="crazyflie_mrac_hover_controller" type="hover_controller" name="hover_controller" output="screen">
+    <remap from="~current_pose" to="$(arg vrpn_topic)"/>
+  </node>
+  <node pkg="crazyflie_mrac_waypoint_generator" type="main_joystick.py" name="waypoint_planner" output="screen">
+    <remap from="~current_pose" to="$(arg vrpn_topic)"/>
+  </node>
+
+  
+  <!-- Joystick -->
+  <node name="joy_node" pkg="joy" type="joy_node" output="screen">
+    <param name="dev" value="$(arg joy_dev)"/>
+  </node>
+</launch>

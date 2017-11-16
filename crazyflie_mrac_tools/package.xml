@@ -1,0 +1,20 @@
+<package>
+  <name>crazyflie_mrac_tools</name>
+  <version>0.0.1</version>
+  <description>Launch files for Crazyflie</description>
+
+  <maintainer email="snchan@ucdavis.edu">Sui Nam Chan</maintainer>
+
+  <license>MIT</license>
+
+  <author email="snchan@ucdavis.edu">Sui Nam Chan</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <run_depend>joy</run_depend>
+  <run_depend>vrpn_client_ros</run_depend>
+
+  <export>
+  </export>
+</package>

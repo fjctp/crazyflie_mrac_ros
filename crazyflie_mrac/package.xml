@@ -1,0 +1,24 @@
+<package>
+  <name>crazyflie_mrac</name>
+  <version>0.0.1</version>
+  <description>Model reference adaptive control for Crazyflie</description>
+
+  <maintainer email="snchan@ucdavis.edu">Sui Nam Chan</maintainer>
+
+  <license>MIT</license>
+
+  <author email="snchan@ucdavis.edu">Sui Nam Chan</author>
+
+  <!-- Dependencies which this package needs to build itself. -->
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <!-- Dependencies needed after this package is compiled. -->
+  <run_depend>crazyflie_mrac_controllers</run_depend>
+  <run_depend>crazyflie_mrac_hover_controller</run_depend>
+  <run_depend>crazyflie_mrac_waypoint_generator</run_depend>
+  <run_depend>crazyflie_mrac_tools</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+</package>

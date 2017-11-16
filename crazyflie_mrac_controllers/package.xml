@@ -1,0 +1,30 @@
+<package>
+  <name>crazyflie_mrac_controllers</name>
+  <version>0.0.1</version>
+  <description>Model reference adaptive control for Crazyflie</description>
+
+  <maintainer email="snchan@ucdavis.edu">Sui Nam Chan</maintainer>
+
+  <license>MIT</license>
+
+  <author email="snchan@ucdavis.edu">Sui Nam Chan</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>joy</build_depend>
+  <build_depend>vrpn_client_ros</build_depend>
+  <build_depend>cmake_modules</build_depend>
+  <build_depend>message_generation</build_depend>
+  
+  <run_depend>roscpp</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>joy</run_depend>
+  <run_depend>vrpn_client_ros</run_depend>
+  <run_depend>cmake_modules</run_depend>
+  <run_depend>message_runtime</run_depend>
+
+  <export>
+  </export>
+</package>

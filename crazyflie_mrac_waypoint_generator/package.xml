@@ -1,0 +1,22 @@
+<package>
+  <name>crazyflie_mrac_waypoint_generator</name>
+  <version>0.0.1</version>
+  <description>Waypoint generator for Crazyflie</description>
+
+  <maintainer email="snchan@ucdavis.edu">Sui Nam Chan</maintainer>
+
+  <license>MIT</license>
+
+  <author email="snchan@ucdavis.edu">Sui Nam Chan</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>rospy</build_depend>
+  <build_depend>message_generation</build_depend>
+
+  <run_depend>rospy</run_depend>
+  <run_depend>message_runtime</run_depend>
+
+  <export>
+  </export>
+</package>
